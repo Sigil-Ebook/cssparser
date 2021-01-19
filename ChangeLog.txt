@@ -1,0 +1,14 @@
+
+Version 1.0
+-----------
+ - Extracted the css parser portions of the code from CSSTidy and reowrked it
+   into a standalone CSS Parser in C++
+
+ - Added support for nesting of @media queries and proper pretty printing
+
+ - Created a token based interface and serializer
+
+ - Added support for @supports
+
+ - Added support for simple validation
+

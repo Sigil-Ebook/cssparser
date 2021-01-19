@@ -1,0 +1,27 @@
+name=cssparser
+EXECUTABLE_NAME=$(name).exe
+INTERMEDIATE_DIR=.\intermediate
+RELEASE_DIR=.\release
+
+SRC_FILES = \
+  $(name)\main.cpp \
+  $(name)\CSSParser.cpp \
+  $(name)\CSSProperties.cpp \
+  $(name)\CSSUtils.cpp
+
+all: clean create_dirs $(name)
+
+$(EXECUTABLE_NAME) : $(SRC_FILES)
+  cl /EHsc /Fe$(RELEASE_DIR)\$(name)\$(EXECUTABLE_NAME) /I$(name) $(SRC_FILES)
+  copy *.obj $(INTERMEDIATE_DIR)
+  del *.obj
+
+$(name): $(EXECUTABLE_NAME)
+
+create_dirs:
+  @if not exist $(RELEASE_DIR)\$(name) mkdir $(RELEASE_DIR)\$(name)
+  @if not exist $(INTERMEDIATE_DIR) mkdir $(INTERMEDIATE_DIR)
+
+clean::
+  @if exist $(RELEASE_DIR) rmdir /S /Q $(RELEASE_DIR)
+  @if exist $(INTERMEDIATE_DIR) rmdir /S /Q $(INTERMEDIATE_DIR)
