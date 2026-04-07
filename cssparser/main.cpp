@@ -42,6 +42,7 @@
 #include <fstream>
 #include <map>
 #include <algorithm>
+#include "CSSDenester.h"
 #include "CSSProperties.h"
 #include "CSSUtils.h"
 #include "CSSParser.h"
@@ -84,14 +85,18 @@ int main(int argc, char *argv[])
             css_file = CSSUtils::file_get_contents(argv[1]);
         }
 
-        // The interface
+        // must first denest the css so that is works with our parser
+        CSSDenester dn;
+        std::string denested_css_file = dn.process(css_file);
+        dn.printErrorReport();
 
+        // The interface
 
         // valid css levels are "CSS1.0", "CSS2.0", "CSS2.1", "CSS3.0" 
         csst.set_level("CSS3.0");
 
         // do the actual parsing
-        csst.parse_css(css_file);
+        csst.parse_css(denested_css_file);
 
         // check for any parse errors
         std::vector<std::string> errors = csst.get_parse_errors();

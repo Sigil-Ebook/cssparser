@@ -22,6 +22,11 @@ It's code was initially extracted from CSSTidy and then reworked.
        The CSSTidy codebase is itself is Available under the LGPL 2.1
  
 
+Update: April 7, 2026
+Note: The underlying parser does not support native nested CSS. So code to
+first denest the css is now included. Only denested css is output.
+
+
 Interface
 =========
 

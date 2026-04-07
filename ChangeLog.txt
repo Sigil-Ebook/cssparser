@@ -1,3 +1,8 @@
+Version 1.1
+-----------
+ - Added CSSDenester.h code to main.cpp to first denest the css before
+   it is parsed.  The serialized output of the parser will be flattened.
+
 
 Version 1.0
 -----------
