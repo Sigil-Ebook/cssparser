@@ -24,7 +24,8 @@ RELEASE_DIR=release
 CSSPARSEROBJS= \
 	cssparser/CSSUtils.o \
 	cssparser/CSSParser.o \
-    cssparser/CSSProperties.o \
+        cssparser/CSSProperties.o \
+        cssparser/CSSDeNest.o \
 	cssparser/main.o
 
 .cpp.o:

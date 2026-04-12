@@ -1,12 +1,12 @@
 Version 1.1
 -----------
- - Added CSSDenester.h code to main.cpp to first denest the css before
+ - Added CSSDeNest code to main.cpp to first denest the css before
    it is parsed.  The serialized output of the parser will be flattened.
 
 
 Version 1.0
 -----------
- - Extracted the css parser portions of the code from CSSTidy and reowrked it
+ - Extracted the css parser portions of the code from CSSTidy and reworked it
    into a standalone CSS Parser in C++
 
  - Added support for nesting of @media queries and proper pretty printing

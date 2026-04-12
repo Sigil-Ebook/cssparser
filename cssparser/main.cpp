@@ -42,7 +42,7 @@
 #include <fstream>
 #include <map>
 #include <algorithm>
-#include "CSSDenester.h"
+#include "CSSDeNest.h"
 #include "CSSProperties.h"
 #include "CSSUtils.h"
 #include "CSSParser.h"
@@ -86,9 +86,7 @@ int main(int argc, char *argv[])
         }
 
         // must first denest the css so that is works with our parser
-        CSSDenester dn;
-        std::string denested_css_file = dn.process(css_file);
-        dn.printErrorReport();
+        std::string denested_css_file = CSSDeNest::denest_css(css_file);
 
         // The interface
 

@@ -1,0 +1,43 @@
+body, h1 {
+  display: block;
+  font-size: 1em;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  text-indent: 0;
+  line-height: 1.05;
+  widows: 1;
+  orphans: 1;
+}
+
+input {
+  /* styles for input not in a label  */
+  border: tomato 2px solid;
+}
+label {
+  /* styles for label */
+  font-family: system-ui;
+  font-size: 1.25rem;
+
+  & input {
+    /* styles for input in a label  */
+    border: blue 2px dashed;
+  }
+}
+
+h2 {
+  color: tomato;
+  & + p {
+    color: white;
+    background-color: black;
+  }
+}
+
+.a {
+    color: red;
+  .b {
+      color: green;
+  }
+  &.b {
+      color:blue;
+  }
+}
