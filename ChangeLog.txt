@@ -1,3 +1,7 @@
+Version 1.2
+-----------
+ - fixed corner case bug of stripping out selectors with no properties
+    
 Version 1.1
 -----------
  - Added CSSDeNest code to main.cpp to first denest the css before
