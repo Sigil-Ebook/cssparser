@@ -24,9 +24,8 @@
  **  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  **  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  **  DEALINGS IN THE SOFTWARE.
- **
+ ** 
  ***********************************************************************/
-
 #include "CSSDeNest.h"
 
 #include <algorithm>
@@ -161,17 +160,17 @@ void CSSDeNest::readParens(const std::string& in, size_t& pos, std::string& out)
 // AST node
 // ------------------------------------------------------------
 #if 0  
-struct CSSDeNest::Node {
+struct Node {
     enum Type { TEXT, BLOCK } type = TEXT;
 
     // TEXT node: raw text (may include a trailing ';')
     std::string text;
 
     // BLOCK node fields
-    std::string header;                      // selector or at-rule, trimmed, without '{'
-    std::string rawBody;                     // raw text between '{' and '}' (before parsing)
-    std::vector<CSSDeNest::Node> children;   // parsed children of this block
-    bool isAtRule = false;                   // header starts with '@'
+    std::string header;           // selector or at-rule, trimmed, without '{'
+    std::string rawBody;          // raw text between '{' and '}' (before parsing)
+    std::vector<Node> children;   // parsed children of this block
+    bool isAtRule = false;        // header starts with '@'
 };
 #endif
 
@@ -329,6 +328,15 @@ std::string CSSDeNest::flattenBlock(const Node& block, const std::string& parent
         std::string inner = flattenNodes(block.children, parentSel);
         out << block.header << " {\n" << inner << "}\n";
     } else {
+        bool hasNestedBlocks = std::any_of(
+            block.children.begin(), block.children.end(),
+            [](const Node& child) { return child.type == Node::BLOCK; });
+
+        if (parentSel.empty() && !hasNestedBlocks) {
+            out << block.header << " {" << block.rawBody << "}\n";
+            return out.str();
+        }
+
         // Regular selector block.
         std::string selector = parentSel.empty()
             ? block.header
@@ -382,4 +390,3 @@ std::string CSSDeNest::denest_css(const std::string& input) {
     std::vector<Node> nodes = parse(input, pos);
     return flattenNodes(nodes, "");
 }
-
